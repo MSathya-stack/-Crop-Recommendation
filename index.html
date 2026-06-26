@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crop Recommendation Tool</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="control-panel" aria-label="Crop inputs">
+        <div class="brand-row">
+          <div class="brand-mark" aria-hidden="true">CR</div>
+          <div>
+            <h1>Crop Recommendation</h1>
+            <p>Match field conditions to suitable crops.</p>
+          </div>
+        </div>
+
+        <form id="cropForm" class="field-grid">
+          <label>
+            Soil type
+            <select id="soil" name="soil">
+              <option value="loamy">Loamy</option>
+              <option value="clay">Clay</option>
+              <option value="sandy">Sandy</option>
+              <option value="black">Black cotton</option>
+              <option value="red">Red soil</option>
+              <option value="alluvial">Alluvial</option>
+            </select>
+          </label>
+
+          <label>
+            Season
+            <select id="season" name="season">
+              <option value="kharif">Kharif / Monsoon</option>
+              <option value="rabi">Rabi / Winter</option>
+              <option value="summer">Summer</option>
+              <option value="annual">Year-round</option>
+            </select>
+          </label>
+
+          <label>
+            Average temperature
+            <span class="input-with-unit">
+              <input id="temperature" name="temperature" type="number" value="28" min="5" max="45" />
+              <span>°C</span>
+            </span>
+          </label>
+
+          <label>
+            Monthly rainfall
+            <span class="input-with-unit">
+              <input id="rainfall" name="rainfall" type="number" value="120" min="0" max="600" />
+              <span>mm</span>
+            </span>
+          </label>
+
+          <label>
+            Soil pH
+            <input id="ph" name="ph" type="number" value="6.8" min="3.5" max="10" step="0.1" />
+          </label>
+
+          <label>
+            Irrigation
+            <select id="irrigation" name="irrigation">
+              <option value="medium">Moderate</option>
+              <option value="low">Limited</option>
+              <option value="high">Reliable</option>
+            </select>
+          </label>
+
+          <label>
+            Farm priority
+            <select id="priority" name="priority">
+              <option value="balanced">Balanced</option>
+              <option value="lowWater">Low water use</option>
+              <option value="market">Market value</option>
+              <option value="soilHealth">Soil health</option>
+            </select>
+          </label>
+
+          <button type="submit">Recommend Crops</button>
+        </form>
+      </section>
+
+      <section class="results-panel" aria-label="Crop recommendations">
+        <div class="hero-strip">
+          <div>
+            <p class="eyebrow">Best matches</p>
+            <h2 id="summaryTitle">Ready to recommend</h2>
+          </div>
+          <div class="season-badge" id="seasonBadge">Monsoon</div>
+        </div>
+
+        <div id="emptyState" class="empty-state">
+          <h3>Enter your field details</h3>
+          <p>Press Recommend Crops to see the best crop matches for your conditions.</p>
+        </div>
+
+        <div id="resultContent" class="result-content" hidden>
+        <div class="insight-grid">
+          <article>
+            <span id="waterLevel">Moderate</span>
+            <p>Water demand</p>
+          </article>
+          <article>
+            <span id="soilStatus">Loamy</span>
+            <p>Soil profile</p>
+          </article>
+          <article>
+            <span id="riskLevel">Medium</span>
+            <p>Climate risk</p>
+          </article>
+        </div>
+
+        <div id="recommendations" class="recommendation-list" aria-live="polite"></div>
+
+        <aside class="advisory">
+          <h3>Field note</h3>
+          <p id="fieldNote">
+            Adjust the values on the left to get a recommendation based on your local soil, rainfall,
+            temperature, pH, season, and irrigation availability.
+          </p>
+        </aside>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
